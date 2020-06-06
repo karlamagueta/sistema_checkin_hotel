@@ -1,10 +1,10 @@
 print(" KarlaMag's Hotel versão 0.1.1 \n ")
 
 disponiveis = {
-    1:{'quartos': list(range(91,101)), 'valor':325.5},
-    2:{'quartos': list(range(61,91)), 'valor':210},
-    3:{'quartos': list(range(31,61)), 'valor':135.2},
-    4:{'quartos': list(range(5,31)), 'valor':99.99}
+    1: {'quartos': list(range(91,101)), 'valor': 325.5},
+    2: {'quartos': list(range(61,91)), 'valor': 210},
+    3: {'quartos': list(range(31,61)), 'valor': 135.2},
+    4: {'quartos': list(range(5,31)), 'valor': 99.99}
  }
 
 reservados = {}
@@ -32,7 +32,6 @@ while programa_aberto == True:
             continue
         else: 
             break
-        #(;;;;;;;;;;;;;;;;;;;)
 
     quarto_escolhido = int(input(f'Escolha entre os quartos disponíveis: {quartos_disponiveis}'))
     while quarto_escolhido not in quartos_disponiveis:
@@ -53,11 +52,18 @@ while programa_aberto == True:
     Nome do responsável: {hospede}
     Numero do quarto: {quarto_escolhido} 
     Diárias: {diarias}
-    Valor total: {valor_total_diarias}    
+    Valor total: {valor_total_diarias:.2f}    
     ''')
 
     confirma = input('Gostaria de confirmar a reserva?')
     if confirma.strip().lower() != 'sim':
           continue  
     reservados[quarto_escolhido] = {'hospede':hospede, 'Diarias':diarias }
+
+    programa_aberto = input('Gostaria de continuar com o programa aberto? Digite "sim" para continuar').strip()
+    if programa_aberto == 'sim':
+        programa_aberto = True
+
+
+
 
