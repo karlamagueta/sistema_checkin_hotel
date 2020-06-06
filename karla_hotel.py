@@ -9,6 +9,7 @@ disponiveis = {
 
 reservados = {}
 
+
 def obter_quartos_livres(categoria):
     quartos_livres = []
 
@@ -19,8 +20,15 @@ def obter_quartos_livres(categoria):
     return quartos_livres
 
 
+def relatorio(hospede, quarto_escolhido, diarias, valor_total_diarias):
+    print(f'Nome do responsável: {hospede}')
+    print(f'Numero do quarto: {quarto_escolhido}')
+    print(f'Diárias: {diarias}')
+    print(f'Valor total: {valor_total_diarias:.2f}')
+
+
 programa_aberto = True 
-while programa_aberto == True:
+while programa_aberto:
     categoria = int(input('Olá, insira aqui a categoria do quarto:').strip())
     quartos_disponiveis = obter_quartos_livres(categoria)
     if not quartos_disponiveis:
@@ -48,22 +56,14 @@ while programa_aberto == True:
         diarias = int(input('O Valor não é válido, informe novamente o valor:').strip())
     valor_total_diarias = diarias * disponiveis[categoria]['valor']
 
-    print(f'''Resumo da reserva: 
-    Nome do responsável: {hospede}
-    Numero do quarto: {quarto_escolhido} 
-    Diárias: {diarias}
-    Valor total: {valor_total_diarias:.2f}    
-    ''')
+    relatorio(hospede, quarto_escolhido, diarias, valor_total_diarias)
 
-    confirma = input('Gostaria de confirmar a reserva?')
-    if confirma.strip().lower() != 'sim':
-          continue  
-    reservados[quarto_escolhido] = {'hospede':hospede, 'Diarias':diarias }
+    if input('Gostaria de confirmar a reserva?').strip().lower() != 'sim':
+        continue  
 
-    programa_aberto = input('Gostaria de continuar com o programa aberto? Digite "sim" para continuar').strip()
-    if programa_aberto == 'sim':
-        programa_aberto = True
+    reservados[quarto_escolhido] = {'Hospede': hospede, 'Diarias': diarias}
 
-
-
-
+    programa_aberto = input(
+        'Gostaria de continuar com o programa aberto? '
+        'Digite "sim" para continuar'
+    ).strip().lower() == 'sim'
