@@ -1,3 +1,12 @@
+import json
+
+def ler_arquivo(nome):
+    return json.loads(open(nome).read())
+
+def gravar_arquivo(nome,dados):
+    return open(nome,'w').write(json.dumps(dados))
+
+
 print(" KarlaMag's Hotel versão 0.1.1 \n ")
 
 disponiveis = {
@@ -7,8 +16,10 @@ disponiveis = {
     4: {'quartos': list(range(5,31)), 'valor': 99.99}
  }
 
-reservados = {}
-
+try:
+    reservados = ler_arquivo('reservados.json')
+except json.decoder.JSONDecodeError:
+    reservados = {}
 
 def obter_quartos_livres(categoria):
     quartos_livres = []
@@ -63,7 +74,11 @@ while programa_aberto:
 
     reservados[quarto_escolhido] = {'Hospede': hospede, 'Diarias': diarias}
 
+    gravar_arquivo('reservados.json',reservados)
+
     programa_aberto = input(
         'Gostaria de continuar com o programa aberto? '
         'Digite "sim" para continuar'
     ).strip().lower() == 'sim'
+
+
